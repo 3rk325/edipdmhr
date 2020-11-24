@@ -1,0 +1,7 @@
+﻿------ Rebuild All started: Project: WebSite2, Configuration: Debug Any CPU ------
+Validating Web Site
+Building directory '/App_Code/'.
+Building directory '/'.
+
+Validation Complete
+========== Rebuild All: 1 succeeded, 0 failed, 0 skipped ==========

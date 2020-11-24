@@ -1,0 +1,57 @@
+<%@ Master Language="VB" CodeFile="Login.master.vb" Inherits="Login" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+
+<head id="Head1" runat="server">
+    <title>EDI PD Plan</title>
+    <style type="text/css" media="Screen">
+	.TFtable{
+				border-collapse:collapse; 
+	}
+	.TFtable td{ 
+		padding:7px; border:#4e95f4 1px solid;
+	}
+	/* provide some minimal visual accomodation for IE8 and below */
+	.TFtable tr{
+		background: #b8d1f3;
+	}
+	/*  Define the background color for all the ODD background rows  */
+	.TFtable tr:nth-child(odd){ 
+		background: #b8d1f3;
+	}
+	/*  Define the background color for all the EVEN background rows  */
+	.TFtable tr:nth-child(even){
+		background: #dae5f4;
+	}
+        .auto-style1 {
+            width: 1048px;
+            text-align: center;
+        }
+        .auto-style2 {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <table>
+            <tr>
+                <td>
+                    <h1 style="text-align:left; vertical-align:middle "><asp:Image ID="Image1" imageurl="~/images/EDI logo.png" runat="server" Height="97px" /></h1>
+                </td>
+                <td class="auto-style1">
+                    <h1 class="auto-style2"><asp:Label ID="Label1" runat="server" ForeColor="#3366CC" Text="PD Management System (Read Only)" CssClass="auto-style2"></asp:Label></h1>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <asp:contentplaceholder id="ContentPlaceHolder1" runat="server">
+        </asp:contentplaceholder>
+    </div>
+    </form>
+</body>
+</html>

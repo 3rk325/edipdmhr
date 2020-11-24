@@ -1,0 +1,140 @@
+<%@ Master Language="VB" CodeFile="site.master.vb" Inherits="MasterPage" %>
+<%@ Import Namespace="System" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<script runat="server">
+    Protected Sub Page_Load(sender As Object, e As EventArgs)
+        Dim hOurs As Integer = DateTime.Now.Hour
+        hOurs = (hOurs - 5)
+        If (hOurs < 12) Then
+            lblGreeting.Text = "Good Morning"
+            'lblDate.Text = Convert.ToString(DateTime.Now)
+        ElseIf (hOurs < 17) Then
+            lblGreeting.Text = "Good Afternoon"
+            'lblDate.Text = Convert.ToString(DateTime.Now)
+        Else
+            lblGreeting.Text = "Good Evening"
+            'lblDate.Text = Convert.ToString(DateTime.Now)
+        End If
+
+        'If DateTime.Now.Hour < 12 Then
+        '    lblGreeting.Text = "Good Morning"
+        '    'lblDate.Text = Convert.ToString(DateTime.Now)
+        'ElseIf DateTime.Now.Hour < 17 Then
+        '    lblGreeting.Text = "Good Afternoon"
+        '    'lblDate.Text = Convert.ToString(DateTime.Now)
+        'Else
+        '    lblGreeting.Text = "Good Evening"
+        '    'lblDate.Text = Convert.ToString(DateTime.Now)
+        'End If
+    End Sub
+</script>
+
+<head runat="server">
+    <title>EDI PD Plan</title>
+    <style type="text/css" media="Screen">
+	.TFtable{
+				border-collapse:collapse; 
+	}
+	.TFtable td{ 
+		padding:7px; border:#4e95f4 1px solid;
+	}
+	/* provide some minimal visual accomodation for IE8 and below */
+	.TFtable tr{
+		background: #b8d1f3;
+		
+	}
+	/*  Define the background color for all the ODD background rows  */
+	.TFtable tr:nth-child(odd){ 
+		background: #b8d1f3;
+	}
+	/*  Define the background color for all the EVEN background rows  */
+	.TFtable tr:nth-child(even){
+		background: #dae5f4;
+	}
+        .auto-style1 {
+            width: 1052px;
+        }
+        .auto-style2 {
+            text-align: center;
+        }
+        .auto-style3 {
+            text-decoration: underline;
+        }
+    </style>
+    <script language="JavaScript">
+	window.history.forward(-1);
+</script>
+</head>
+<body onload="Page_Load()">
+    <form id="form1" runat="server">
+    <div>
+        <table>
+            <tr>
+                <td>
+                    <h1 style="text-align:left; vertical-align:middle "><asp:Image ID="Logo" imageurl="~/images/EDI logo.png" runat="server" Height="77px" /></h1>
+                </td>
+                <td class="auto-style1">
+                    <h1 class="auto-style2"><asp:Label ID="Label1" runat="server" ForeColor="#3366CC" Text="PD Management System (Read Only)" CssClass="auto-style3"></asp:Label></h1>
+                    <p class="auto-style2"><asp:Label ID="lblGreeting" runat="server" ForeColor="#999999" Font-Bold="True"></asp:Label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Label ID="Label2" runat="server" Text="Username : " Font-Bold="True" Font-Underline="True" ForeColor="#999999"></asp:Label><asp:Label ID="Lbl_UsrName" runat="server" ForeColor="#999999"><%= Session("Username") %></asp:Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <asp:Label ID="Label3" runat="server" Text="School Name : " Font-Bold="True" Font-Underline="True" ForeColor="#999999"></asp:Label><asp:Label ID="Lbl_SchName" runat="server" ForeColor="#999999"><%= Session("SchFullName") %></asp:Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <asp:Label ID="Label6" runat="server" Text="School Year : " Font-Bold="True" Font-Underline="True" ForeColor="#999999"></asp:Label><asp:Label ID="Label5" runat="server" ForeColor="#999999"><%= Session("pdneedyr") %></asp:Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <asp:Label ID="Label4" runat="server" Text=" Today Date : " Font-Bold="True" Font-Underline="True" ForeColor="#999999"></asp:Label><asp:Label ID="Lbl_Dte" runat="server" ForeColor="#999999"><%= FormatDateTime(Date.Now.AddHours(-5), 1) %></asp:Label>
+                    </p>
+                </td>
+            </tr>
+<!--            <tr>
+                <td>User Name : </td>
+                <td>School Name : </td>
+            </tr>
+-->
+        </table>
+      <table style="width:100%"class="TFtable">
+      <tr style="font-family:Calibri; font-size: medium">
+          <%
+              If ((Session.Item("Role")) = "Admin" Or (Session.Item("school")) = "ALL") Then
+%>
+      <td><a href="pdplanview.aspx">PD Plan View</a></td>
+          <%
+            Else
+%>
+      <td><a href="pdplanviewEUS.aspx">PD Plan View</a></td>
+          <%
+            End If
+%>
+<!--
+      <td ><a href="pdentryTrv.aspx">Individual Request (Travel)</a></td>
+      <td ><a href="pdentryLocal.aspx">Individual Request (Local)</a></td> 
+      <td ><a href="pdprovisionsTrv.aspx">Group Request (Travel)</a></td>
+      <td ><a href="pdprovisionsLocal.aspx">Group Request (Local)</a></td>
+      <td ><a href="coursedetails.aspx">Course details</a></td>
+      <td ><a href="empdetails.aspx">Employee details</a></td>
+-->
+<!--  <td ><a href="budgetstatus.aspx">Budget Status</a></td>-->
+<!--  <td ><a href="monitorpdbudget.aspx">Budget Status (Monitoring2)</a></td>-->
+<!--  <td ><a href="budgetTransactions.aspx">PD Trns. History</a></td> -->
+<%
+            If ((Session.Item("Role")) = "Admin" Or (Session.Item("school")) = "ALL") Then
+%>
+      <td ><a href="monitorpdbudget.aspx">Budget Monitoring</a></td>
+      <td ><a href = "logindetails.aspx" > Control Panel</a></td>
+<%
+            Else
+%>
+    <td ><a href="monitorpdbudget4Sh.aspx">Budget Monitoring</a></td>
+<%
+            End If
+%>
+<!--  <td ><a href="faq.aspx">FAQ</a></td> -->
+      <td ><a href="Default.aspx">Logoff</a></td></tr>      
+      </table>
+    </div>
+    <div>
+        <asp:contentplaceholder id="ContentPlaceHolder1" runat="server">
+        </asp:contentplaceholder>
+    </div>
+    </form>
+</body>
+</html>
